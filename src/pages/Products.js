@@ -6,6 +6,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Reveal, StaggerContainer, StaggerItem, MagneticButton, GlowCard } from '../components/Motion';
 import useDebounce from '../hooks/useDebounce';
 import { QueryErrorState, StatsLoadingGrid, TableLoadingRows } from '../components/QueryState';
+import {
+  Search, Plus, Image, Upload, FolderOpen, RefreshCw, Trash2, Pencil,
+  Package, AlertTriangle, Layers, TrendingUp, X, Shirt
+} from 'lucide-react';
 
 const CATEGORIES = [
   'Lawn', 'Chiffon', 'Silk', 'Linen', 'Cotton', 'Embroidered',
@@ -92,17 +96,17 @@ function ImageUploadZone({ preview, onFileSelect, onRemove }) {
                   type="button"
                   onClick={e => { e.stopPropagation(); fileRef.current.click(); }}
                   className="btn btn-secondary"
-                  style={{ fontSize: '0.72rem', padding: '7px 14px' }}
+                  style={{ fontSize: '0.72rem', padding: '7px 14px', display: 'flex', alignItems: 'center', gap: 6 }}
                 >
-                  🔄 Replace
+                  <RefreshCw size={12} /> Replace
                 </button>
                 <button
                   type="button"
                   onClick={e => { e.stopPropagation(); onRemove(); }}
                   className="btn btn-danger"
-                  style={{ fontSize: '0.72rem', padding: '7px 14px' }}
+                  style={{ fontSize: '0.72rem', padding: '7px 14px', display: 'flex', alignItems: 'center', gap: 6 }}
                 >
-                  🗑️ Remove
+                  <Trash2 size={12} /> Remove
                 </button>
               </div>
             </motion.div>
@@ -114,7 +118,9 @@ function ImageUploadZone({ preview, onFileSelect, onRemove }) {
               exit={{ opacity: 0 }}
               style={{ textAlign: 'center', padding: '28px 20px' }}
             >
-              <div style={{ fontSize: '2rem', marginBottom: 8, opacity: 0.6 }}>🖼️</div>
+              <div style={{ marginBottom: 8, opacity: 0.6, display: 'flex', justifyContent: 'center' }}>
+                <Upload size={32} style={{ color: 'var(--accent)' }} />
+              </div>
               <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', fontWeight: 600, marginBottom: 4 }}>
                 {drag ? 'Drop image here' : 'Click or drag & drop to upload'}
               </div>
@@ -141,10 +147,10 @@ function ImageUploadZone({ preview, onFileSelect, onRemove }) {
           <button
             type="button"
             className="btn btn-ghost"
-            style={{ fontSize: '0.7rem', padding: '6px 14px', flex: 1 }}
+            style={{ fontSize: '0.7rem', padding: '6px 14px', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
             onClick={() => fileRef.current.click()}
           >
-            📁 Browse Files
+            <FolderOpen size={14} /> Browse Files
           </button>
         </div>
       )}
@@ -155,18 +161,18 @@ function ImageUploadZone({ preview, onFileSelect, onRemove }) {
           <button
             type="button"
             className="btn btn-secondary"
-            style={{ fontSize: '0.7rem', padding: '6px 14px', flex: 1 }}
+            style={{ fontSize: '0.7rem', padding: '6px 14px', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
             onClick={() => fileRef.current.click()}
           >
-            🔄 Replace Image
+            <RefreshCw size={12} /> Replace Image
           </button>
           <button
             type="button"
             className="btn btn-danger"
-            style={{ fontSize: '0.7rem', padding: '6px 14px' }}
+            style={{ fontSize: '0.7rem', padding: '6px 14px', display: 'flex', alignItems: 'center', gap: 6 }}
             onClick={onRemove}
           >
-            🗑️ Remove
+            <Trash2 size={12} /> Remove
           </button>
         </div>
       )}
@@ -370,7 +376,7 @@ export default function Products() {
         <div className="table-toolbar" style={{ marginTop: 28 }}>
           <div className="filter-group">
             <div className="search-input-wrapper glass" style={{ border: '1px solid var(--border-faint)' }}>
-              <span className="search-icon">🔍</span>
+              <span className="search-icon"><Search size={16} /></span>
               <input
                 className="form-input search-input"
                 style={{ background: 'transparent', border: 'none' }}
@@ -407,7 +413,9 @@ export default function Products() {
               <QueryErrorState message={loadError} onRetry={fetchProducts} />
             ) : products.length === 0 ? (
               <div className="empty-state">
-                <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>👗</div>
+                <div style={{ marginBottom: 12, display: 'flex', justifyContent: 'center' }}>
+                  <Shirt size={48} style={{ color: 'var(--accent)', opacity: 0.6 }} />
+                </div>
                 <h3>No products yet</h3>
                 <p>Start building your catalog by adding your first item.</p>
               </div>
@@ -447,10 +455,10 @@ export default function Products() {
                           <div style={{
                             width: 44, height: 44, borderRadius: 8, display: 'flex',
                             alignItems: 'center', justifyContent: 'center',
-                            background: 'var(--accent-soft)', fontSize: '1.2rem',
+                            background: 'var(--accent-soft)',
                             border: '1px solid var(--accent-border)',
                           }}>
-                            👗
+                            <Shirt size={20} style={{ color: 'var(--accent)' }} />
                           </div>
                         )}
                       </td>
@@ -515,10 +523,10 @@ export default function Products() {
                               border: '1px solid var(--accent-border)',
                               background: 'var(--accent-soft)', color: 'var(--accent)',
                               display: 'flex', alignItems: 'center', justifyContent: 'center',
-                              cursor: 'pointer', fontSize: '0.8rem',
+                              cursor: 'pointer',
                             }}
                             title="Edit"
-                          >✏️</motion.button>
+                          ><Pencil size={14} /></motion.button>
                           <motion.button
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
@@ -528,10 +536,10 @@ export default function Products() {
                               border: '1px solid rgba(248,113,113,0.25)',
                               background: 'rgba(248,113,113,0.08)', color: '#F87171',
                               display: 'flex', alignItems: 'center', justifyContent: 'center',
-                              cursor: 'pointer', fontSize: '0.8rem',
+                              cursor: 'pointer',
                             }}
                             title="Delete"
-                          >🗑️</motion.button>
+                          ><Trash2 size={14} /></motion.button>
                         </div>
                       </td>
                     </motion.tr>
